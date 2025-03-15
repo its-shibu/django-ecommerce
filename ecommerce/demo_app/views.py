@@ -54,3 +54,35 @@ def post_product(request):
         'form':ProductForm
     }
     return render(request, 'demo/addproduct.html', context)
+    
+
+def show_category(request):
+    category = Category.objects.all()
+    context = {
+        'category': category
+    }
+    return render(request, 'demo/category.html', context)
+
+def delete_category(request, category_id):
+    category = Category.objects.get(id = category_id)
+    category.delete()
+    messages.add_message(request, messages.SUCCESS, 'category deleted successfully')
+    return redirect('/demo/category')
+
+def update_category_form(request, category_id):
+    category = Category.objects.get(id = category_id)
+    if request.method == "POST":
+        form = CategoryForm(request.POST, instance = category)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'category updated successfully')
+            return redirect('/demo/category')
+        else:
+            messages.add_message(request, messages.SUCCESS, 'Failed to update category')
+            return render(request, 'demo/update_category.html', {
+                'form': form
+            })
+    context = {
+        'form': CategoryForm(instance = category)
+    }
+    return render(request, 'demo/update_category.html', context)
