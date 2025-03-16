@@ -3,36 +3,46 @@
 <title>Products</title>
 {% endblock %}
 {% block main_content%}
-    <table class="table table-hover">
-        <thead class="table-dark">
-            <tr">
-                <th>Product Name</th>
-                <th>Stock</th>
-                <th>Product Price</th>
-                <th>Product Image</th>
-                <th>Product Description</th>
-                <th>Actions</th>
+<table class="table table-hover">
+    <thead class="table-dark">
+        <tr">
+            <th>Product Name</th>
+            <th>Stock</th>
+            <th>Product Price</th>
+            <th>Product Image</th>
+            <th>Product Description</th>
+            <th>Actions</th>
             </tr>
-        </thead>
-        <tbody>
-            {% for product in products %}
-            <tr>
-                <td>{{product.product_name}}</td>
-                <td>{{ product.stock }}</td>
-                <td>{{ product.product_price }}</td>
-                <td><img src="/{{ product.product_image }}" alt="" width="150"></td>
-                <td>{{ product.product_description }}</td>
-                <td>
-                    <a href="" class="btn btn-success text-white">
-                        <i class='bx bxs-edit-alt'></i>
-                    </a>
-                    &nbsp;
-                    <a href="" class="btn btn-danger text-white" onclick="return confirm('Are your sure want to Delete this Product ?')">
-                        <i class='bx bx-trash-alt' ></i>
-                    </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    </thead>
+    <tbody>
+        
+        {% for msg in messages %}
+        {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+        <div class="alert alert-success" role="alert">
+            {{ msg }}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        {% for product in products %}
+        <tr>
+            <td>{{product.product_name}}</td>
+            <td>{{ product.stock }}</td>
+            <td>{{ product.product_price }}</td>
+            <td><img src="/{{ product.product_image }}" alt="" width="150"></td>
+            <td>{{ product.product_description }}</td>
+            <td>
+                <a href="/demo/update_product/{{product.id}}" class="btn btn-success text-white">
+                    <i class='bx bxs-edit-alt'></i>
+                </a>
+                &nbsp;
+                <a href="/demo/delete_product/{{product.id}}" class="btn btn-danger text-white"
+                    onclick="return confirm('Are your sure want to Delete this Product ?')">
+                    <i class='bx bx-trash-alt'></i>
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

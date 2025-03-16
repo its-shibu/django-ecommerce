@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from . models import *
 from . forms import *
 from django.contrib import messages
+import os
 
 
 
@@ -86,3 +87,31 @@ def update_category_form(request, category_id):
         'form': CategoryForm(instance = category)
     }
     return render(request, 'demo/update_category.html', context)
+
+def delete_product(request, product_id):
+    product = Product.objects.get(id = product_id)
+    os.remove(product.product_image.path)
+    product.delete()
+    messages.add_message(request, messages.SUCCESS, 'product deleted successfully')
+    return redirect('/demo/product')
+
+def update_product_form(request, product_id):
+    product = Product.objects.get(id = product_id)
+    if request.method == "POST":
+        if request.FILES:
+            os.remove(product.product_image.path)
+            form = ProductForm(request.POST, request.FILES, instance=product)
+            if form.is_valid():
+                form.save()
+                messages.add_message(request, messages.SUCCESS, 'product updated successfully')
+                return redirect('/demo/product')
+            else:
+                messages.add_message(request, messages.ERROR, 'Failed to update product')
+                return render(request, 'demo/update_product.html', {
+                    'form': form
+                })
+    context = {
+        'form': ProductForm(instance=product)
+    }
+    return render(request, 'demo/update_product.html', context)
+        
