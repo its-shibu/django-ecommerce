@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'demo_app',
     "crispy_forms",
     "crispy_bootstrap5",
+    "accounts",
 ]
 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

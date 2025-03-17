@@ -100,16 +100,16 @@ def update_product_form(request, product_id):
     if request.method == "POST":
         if request.FILES:
             os.remove(product.product_image.path)
-            form = ProductForm(request.POST, request.FILES, instance=product)
-            if form.is_valid():
-                form.save()
-                messages.add_message(request, messages.SUCCESS, 'product updated successfully')
-                return redirect('/demo/product')
-            else:
-                messages.add_message(request, messages.ERROR, 'Failed to update product')
-                return render(request, 'demo/update_product.html', {
-                    'form': form
-                })
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.add_message(request, messages.SUCCESS, 'product updated successfully')
+            return redirect('/demo/product')
+        else:
+            messages.add_message(request, messages.ERROR, 'Failed to update product')
+            return render(request, 'demo/update_product.html', {
+                'form': form
+            })
     context = {
         'form': ProductForm(instance=product)
     }
