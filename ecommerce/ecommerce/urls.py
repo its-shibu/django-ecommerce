@@ -25,7 +25,7 @@ def homepage(request):
     return HttpResponse('our website is in under construction')
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('demo/', include('demo_app.urls')),
+    path('admin/user', admin.site.urls),
+    path('admin/', include('demo_app.urls')),
     path('', include('accounts.urls') )
 ]
