@@ -1,163 +1,264 @@
-{% extends 'layouts.html'%}
+{% extends 'layouts.html' %}
 {% load crispy_forms_tags %}
 
 {% block title %}
     <title>Admin Dashboard</title>
 {% endblock %}
- 
+
 {% block main_content %}
 <div class="container-fluid">
-
-  <div class="container-fluid">
-    <h2 class="text-center my-3 text-muted">
-      Admin Dashboard
-    </h2>
-    <div class="row d-flex">
-      <div class="col-md-6 col-xl-4 mb-4">
-        <a href="#" class="text-decoration-none">
-          <div class="card shadow border-0 py-2">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col me-2">
-                  <div class="text-uppercase text-primary fw-bold text-xs mb-1 text-center">
-                    <span>
-                      Total Orders
-                    </span>
-                  </div>
-                  <div class="text-secondary fw-bold mb-0 text-center">
-                    <span>Delivered: 0</span>
-                  </div>
-                  <div class="col-auto text-center">
-                    <i class="fab fa-first-order-alt fs-1 text-success fa-spin"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-xl-4 mb-4">
-        <a href="#" class="text-decoration-none">
-          <div class="card shadow border-0 py-2 bg-warning">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col me-2">
-                  <div class="text-uppercase text-light fw-bold text-xs mb-1 text-center">
-                    <span>
-                      Total Users
-                    </span>
-                  </div>
-                  <div class="text-secondary fw-bold mb-0 text-center">
-                    <span>Deactivated: 0</span>
-                  </div>
-                  <div class="col-auto text-center">
-                    <i class="fas fa-users fs-1 text-success"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-xl-4 mb-4">
-        <a href="#" class="text-decoration-none">
-          <div class="card shadow border-0 py-2 bg-success">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col me-2">
-                  <div class="text-uppercase text-light fw-bold text-xs mb-1 text-center">
-                    <span>
-                      Total Products
-                    </span>
-                  </div>
-                  <div class="text-warning fw-bold mb-0 text-center">
-                    <span>Out of Stock: 0</span>
-                  </div>
-                  <div class="col-auto text-center">
-                    <i class="fas fa-globe fs-1 text-light"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-xl-4 mb-4">
-        <a href="#" class="text-decoration-none">
-          <div class="card shadow border-0 py-2 bg-danger">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col me-2">
-                  <div class="text-uppercase text-light fw-bold text-xs mb-1 text-center">
-                    <span>
-                      Total Sales
-                    </span>
-                  </div>
-                  <div class="text-white fw-bold mb-0 text-center">
-                    <span>Booking: 0</span>
-                  </div>
-                  <div class="col-auto text-center">
-                    <i class="fas fa-globe fs-1 text-white"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-xl-4 mb-4">
-        <a href="#" class="text-decoration-none">
-          <div class="card shadow border-0 py-2 bg-primary">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col me-2">
-                  <div class="text-uppercase text-light fw-bold text-xs mb-1 text-center">
-                    <span>
-                      Admins
-                    </span>
-                  </div>
-                  <div class="text-white fw-bold mb-0 text-center">
-                    <span>Super Admin: 1</span>
-                  </div>
-                  <div class="col-auto text-center">
-                    <i class="fas fa-users fs-1 text-white"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
-      <div class="col-md-6 col-xl-4 mb-4">
-        <a href="#" class="text-decoration-none">
-          <div class="card shadow border-0 py-2 bg-dark">
-            <div class="card-body">
-              <div class="row align-items-center no-gutters">
-                <div class="col me-2">
-                  <div class="text-uppercase text-light fw-bold text-xs mb-1 text-center">
-                    <span>
-                      Categories
-                    </span>
-                  </div>
-                  <div class="text-white fw-bold mb-0 text-center">
-                    <span>Sub-Categories: 0</span>
-                  </div>
-                  <div class="col-auto text-center">
-                    <i class="fas fa-globe fs-1 text-white"></i>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </a>
-      </div>
-
+    <!-- Dashboard Header -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="fw-bold text-gradient-primary">Admin Dashboard</h1>
+        <button class="btn btn-primary">
+            <i class="fas fa-plus me-2"></i> Generate Report
+        </button>
     </div>
-  </div>
+
+    <!-- Key Metrics Section -->
+    <div class="row g-4 mb-4">
+        <!-- Total Orders -->
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-lg border-0 hover-scale">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="text-uppercase text-muted fw-bold mb-2">Total Orders</h5>
+                            <p class="text-success fw-bold mb-0">1,234</p>
+                        </div>
+                        <div class="icon-circle bg-gradient-primary text-white">
+                            <i class="fas fa-shopping-cart fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Total Revenue -->
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-lg border-0 hover-scale bg-gradient-success">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="text-uppercase text-light fw-bold mb-2">Total Revenue</h5>
+                            <p class="text-light fw-bold mb-0">$123,456</p>
+                        </div>
+                        <div class="icon-circle bg-light text-success">
+                            <i class="fas fa-dollar-sign fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Users -->
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-lg border-0 hover-scale bg-gradient-warning">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="text-uppercase text-light fw-bold mb-2">Active Users</h5>
+                            <p class="text-light fw-bold mb-0">5,678</p>
+                        </div>
+                        <div class="icon-circle bg-light text-warning">
+                            <i class="fas fa-users fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pending Tasks -->
+        <div class="col-md-6 col-xl-3">
+            <div class="card shadow-lg border-0 hover-scale bg-gradient-danger">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div>
+                            <h5 class="text-uppercase text-light fw-bold mb-2">Pending Tasks</h5>
+                            <p class="text-light fw-bold mb-0">23</p>
+                        </div>
+                        <div class="icon-circle bg-light text-danger">
+                            <i class="fas fa-tasks fa-2x"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts and Graphs Section -->
+    <div class="row g-4 mb-4">
+        <!-- Sales Overview -->
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-muted">Sales Overview</h5>
+                    <canvas id="salesChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Revenue Breakdown -->
+        <div class="col-md-4">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-muted">Revenue Breakdown</h5>
+                    <canvas id="revenueChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Activities and Data Tables -->
+    <div class="row g-4">
+        <!-- Recent Activities -->
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-muted">Recent Activities</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>New order placed</span>
+                            <small class="text-muted">2 mins ago</small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>User registration</span>
+                            <small class="text-muted">10 mins ago</small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>Product added</span>
+                            <small class="text-muted">1 hour ago</small>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>Payment received</span>
+                            <small class="text-muted">2 hours ago</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Top Products -->
+        <div class="col-md-6">
+            <div class="card shadow-lg border-0">
+                <div class="card-body">
+                    <h5 class="card-title fw-bold text-muted">Top Products</h5>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Sales</th>
+                                <th>Revenue</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Product A</td>
+                                <td>123</td>
+                                <td>$12,345</td>
+                            </tr>
+                            <tr>
+                                <td>Product B</td>
+                                <td>98</td>
+                                <td>$9,876</td>
+                            </tr>
+                            <tr>
+                                <td>Product C</td>
+                                <td>76</td>
+                                <td>$7,654</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+<!-- Include Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- Custom CSS -->
+<style>
+    .text-gradient-primary {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .hover-scale {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hover-scale:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .bg-gradient-primary {
+        background: linear-gradient(135deg, #6a11cb, #2575fc);
+    }
+
+    .bg-gradient-success {
+        background: linear-gradient(135deg, #00b09b, #96c93d);
+    }
+
+    .bg-gradient-warning {
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+
+    .bg-gradient-danger {
+        background: linear-gradient(135deg, #ff6b6b, #ffa5a5);
+    }
+</style>
+
+<!-- Chart.js Scripts -->
+<script>
+    // Sales Overview Chart
+    const salesChart = new Chart(document.getElementById('salesChart'), {
+        type: 'line',
+        data: {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Sales',
+                data: [1200, 1900, 3000, 2500, 2000, 3000],
+                borderColor: '#6a11cb',
+                fill: false,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false },
+            }
+        }
+    });
+
+    // Revenue Breakdown Chart
+    const revenueChart = new Chart(document.getElementById('revenueChart'), {
+        type: 'doughnut',
+        data: {
+            labels: ['Product A', 'Product B', 'Product C'],
+            datasets: [{
+                data: [300, 150, 100],
+                backgroundColor: ['#6a11cb', '#2575fc', '#00b09b'],
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { position: 'bottom' },
+            }
+        }
+    });
+</script>
 {% endblock %}

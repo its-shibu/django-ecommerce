@@ -3,38 +3,37 @@
 
 {% block title %}
 <title>Add Category</title>
-{%endblock%}
+{% endblock %}
 
 {% block main_content %}
-<div class="container-fluid mt-4">
-    <div class="d-flex justify-content-center">
+<div class="container-fluid" style="background-color: #f7f9fc; min-height: 100vh;">
+    <div class="d-flex justify-content-center align-items-center" style="height: 100%;">
         <div class="col-md-6">
-            <h2 class="text-muted text-center">
-                Add Category Form
-            </h2>
-            {% for msg in messages %}
-
-            {% if msg.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
-            <div class="alert alert-success">
-                {{msg}}
-            </div>
-            {% endif %}
-
-            {% if msg.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
-            <div class="alert alert-danger">
-                {{msg}}
-            </div>
-            {% endif %}
-
-            {% endfor %}
-            <form action="" method="post" class="shadow-lg p-3">
-                {% csrf_token %}
-                {{ form | crispy }}
-                <div class="mt-3">
-                    <input type="submit" value="Add category" class="btn btn-primary">
+            <div class="card shadow-lg border-0 rounded">
+                <div class="card-header bg-primary text-white text-center">
+                    <h3 class="mb-0">Add Category</h3>
                 </div>
-            </form>
+                <div class="card-body p-4">
+                    {% for msg in messages %}
+                    <div class="alert {{ msg.tags }} alert-dismissible fade show" role="alert">
+                        {{ msg }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    {% endfor %}
+
+                    <form action="" method="post" class="">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <div class="d-grid mt-3">
+                            <button type="submit" class="btn btn-primary btn-block">
+                                <i class="bi bi-plus-circle"></i> Add Category
+                            </button>
+                            <p>Goto <a href="/admin/category">Category</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-{%endblock%}
+{% endblock %}

@@ -4,6 +4,8 @@ from . models import *
 from . forms import *
 from django.contrib import messages
 import os
+from django.contrib.auth.decorators import login_required
+from accounts.auth import admin_only
 
 
 
@@ -13,6 +15,8 @@ def index(request):
 def test(request):
     return HttpResponse("This is the demo app.")
 
+@login_required
+@admin_only
 def show_products(request):
     products = Product.objects.all()
     context = {
@@ -20,6 +24,9 @@ def show_products(request):
     }
     return render(request, 'demo/index.html', context)
     
+
+@login_required    
+@admin_only
 def post_category(request):
     if request.method == 'POST':
         form = CategoryForm(request.POST)
@@ -38,7 +45,8 @@ def post_category(request):
     } 
     return render(request, 'demo/addcategory.html', context)
 
-
+@login_required
+@admin_only
 def post_product(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
@@ -56,7 +64,8 @@ def post_product(request):
     }
     return render(request, 'demo/addproduct.html', context)
     
-
+@login_required
+@admin_only
 def show_category(request):
     category = Category.objects.all()
     context = {
@@ -64,12 +73,18 @@ def show_category(request):
     }
     return render(request, 'demo/category.html', context)
 
+
+@login_required
+@admin_only
 def delete_category(request, category_id):
     category = Category.objects.get(id = category_id)
     category.delete()
     messages.add_message(request, messages.SUCCESS, 'category deleted successfully')
     return redirect('/admin/category')
 
+
+@login_required
+@admin_only
 def update_category_form(request, category_id):
     category = Category.objects.get(id = category_id)
     if request.method == "POST":
@@ -88,12 +103,19 @@ def update_category_form(request, category_id):
     }
     return render(request, 'demo/update_category.html', context)
 
+
+@login_required
+@admin_only
 def delete_product(request, product_id):
     product = Product.objects.get(id = product_id)
     os.remove(product.product_image.path)
     product.delete()
     messages.add_message(request, messages.SUCCESS, 'product deleted successfully')
     return redirect('/admin/product')
+
+
+@login_required
+@admin_only
 
 def update_product_form(request, product_id):
     product = Product.objects.get(id = product_id)
