@@ -27,5 +27,6 @@ def homepage(request):
 urlpatterns = [
     path('admin/user', admin.site.urls),
     path('admin/', include('demo_app.urls')),
-    path('', include('accounts.urls') )
+    path('', include('accounts.urls') ),
+    path('', include('userspage.urls'))
 ]
