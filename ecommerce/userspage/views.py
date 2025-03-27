@@ -1,5 +1,11 @@
 from django.shortcuts import render
+from demo_app.models import *
 
-# Create your views here.
+
 def index(request):
-    return render(request, 'client/homepage.html')
+    products = Product.objects.all().order_by('-id')[:8]
+    context = {
+        'products': products
+    }
+    return render(request, 'client/homepage.html', context)
+
