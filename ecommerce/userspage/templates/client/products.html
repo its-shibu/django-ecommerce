@@ -21,10 +21,12 @@
                 <img src="/{{product.product_image}}" class="card-img-top" alt="{{product.product_name}}">
                 <div class="card-body">
                     <h5 class="card-title">{{product.product_name}}</h5>
-                    <p>{{product.product_price}}</p>
-                   <button class="btn btn-success">
-                    View Details
-                   </button>
+                    <p>Rs. {{product.product_price}}</p>
+                    <a href="/productdetails/{{product.id}}">
+                        <button class="btn btn-success px-4 rounded-pill">
+                            View Details
+                        </button>
+                    </a>
                 </div>
             </div>
         </div>

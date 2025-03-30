@@ -1,0 +1,38 @@
+{% extends 'client/layouts.html' %}
+{% load static %}
+
+{% block title %}
+<title>Online Shop || Product Details</title>
+{% endblock %}
+
+{% block main_content %}
+
+<!-- product details start -->
+
+<div class="container-fluid mt-3">
+
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow-sm">
+                    <img src="/{{product.product_image}}" class="card-img-top" alt="Product Image">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">{{product.product_name}}</h5>
+                        <p class="card-text text-muted">{{product.product_description}}</p>
+                        <h6 class="text-primary">Rs. {{product.product_price}}</h6>
+                        <h6 class="text-primary">Avabilable Stock:  {{product.stock}}</h6>
+                        <a href="" class="btn btn-success">Add to Cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- product details end  -->
+
+
+
+
+{% endblock %}
