@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>Online Shop || Product Details</title>
+<title>Online Shop || {{product.product_name}}</title>
 {% endblock %}
 
 {% block main_content %}
@@ -21,7 +21,7 @@
                         <p class="card-text text-muted">{{product.product_description}}</p>
                         <h6 class="text-primary">Rs. {{product.product_price}}</h6>
                         <h6 class="text-primary">Avabilable Stock:  {{product.stock}}</h6>
-                        <a href="" class="btn btn-success">Add to Cart</a>
+                        <a href="/add_to_cart/{{product.id}}" class="btn btn-success">Add to Cart</a>
                     </div>
                 </div>
             </div>
