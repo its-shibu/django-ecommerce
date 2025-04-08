@@ -44,7 +44,7 @@
                             <a href="/delete_cart_items/{{items.id}}" class="btn btn-danger">Delete</a>
                         </td>
                         <td>
-                            <a href="/order_items" class="btn btn-success">Order</a>
+                        <a href="/order_items/{{item.product.id}}/{{item.id}}" class="btn btn-success">Order</a>
                         </td>
                     </tr>
                     {% endfor %}
