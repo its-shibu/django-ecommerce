@@ -1,0 +1,58 @@
+{% extends 'client/layouts.html' %}
+{% load static %}
+
+{% block title %}
+<title>Online Shop || Cart Items</title>
+{% endblock %}
+
+{% block main_content %}
+
+<!-- Cart Container Start -->
+<div class="container mt-4">
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-8">
+
+            {% for msg in messages %}
+            <div class="alert {{ msg.tags }} alert-dismissible fade show" role="alert">
+                {{ msg }}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endfor %}
+            
+            <h2 class="text-muted text-center">Cart Items</h2>
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Product Price</th>
+                        <th>Image</th>
+                        <th>Created Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in items %}
+                    <tr>
+                        <td>{{ item.product.product_name }}</td>
+                        <td>Rs. {{ item.product.product_price }}</td>
+                        <td>
+                            <img src="/{{ item.product.product_image }}" alt="{{ item.product.product_name }}"
+                                class="img-fluid" width="100">
+                        </td>
+                        <td>{{ item.created_date }}</td>
+                        <td>
+                            <a href="/delete_cart_items/{{items.id}}" class="btn btn-danger">Delete</a>
+                        </td>
+                        <td>
+                            <a href="/order_items" class="btn btn-success">Order</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!-- Cart Container End -->
+
+{% endblock %}

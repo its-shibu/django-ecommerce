@@ -1,5 +1,6 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from demo_app.models import *
+from userspage.forms import OrderForm
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -37,7 +38,7 @@ def add_to_cart(request, product_id):
     check_itmes_presence = Cart.objects.filter(user=user, product= product)
     if check_itmes_presence:
         messages.add_message(request, messages.ERROR, 'Product already exist in the Cart.')
-        return redirect('/product')
+        return redirect('/mycart')
     else:
         cart = Cart.objects.create(product=product, user=user)
         if cart:
@@ -46,4 +47,22 @@ def add_to_cart(request, product_id):
         else:
             messages.add_message(request, messages.ERROR, 'Unable to add to cart')
             return redirect('/product')
-            
+@login_required
+@user_only
+def show_cart_items(request):
+    user = request.user
+    items = Cart.objects.filter(user=user) 
+    context = {
+        'items': items
+    }
+    return render(request, 'client/cart.html', context)
+
+
+@login_required
+@user_only
+def order_items(request):
+    context = {
+        'form' : OrderForm
+    }
+    return render(request, 'client/order.html', context)
+
